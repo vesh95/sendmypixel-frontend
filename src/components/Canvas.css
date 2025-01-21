@@ -1,0 +1,11 @@
+.Canvas {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.Canvas__row {
+}
