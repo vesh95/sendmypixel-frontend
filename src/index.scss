@@ -14,9 +14,12 @@ body {
 
 #canvas {
     margin: 30px 50px;
-    border: darkgray 1px dashed;
+    -webkit-box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
+    box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
 
-    image-rendering: pixelated; /* Отключение сглаживания для браузеров */
-    image-rendering: crisp-edges; /* Для некоторых браузеров */
-    cursor: crosshair
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    cursor: crosshair;
+    background-color: white;
 }
