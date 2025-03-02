@@ -13,7 +13,7 @@ jobs:
     
     env:
       NODE_ENV: ${{ vars.NODE_ENV }}
-      API_HOST: ${{ secrets.API_HOST }}
+      API_HOST: ${{ vars.API_HOST }}
 
     steps:
       - name: Checkout repository
@@ -25,7 +25,7 @@ jobs:
           node-version: '23.6.0'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --save-dev
 
       - name: Build project
         run: npm run build
