@@ -22,7 +22,7 @@ module.exports = {
 
         new Dotenv({
             path: __dirname + '/.env',
-            // systemvars: true,
+            systemvars: true,
         }),
 
 
