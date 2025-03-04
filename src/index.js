@@ -1,6 +1,23 @@
 import ws from "./websocket";
-import {getState, setPixel} from "./api_client";
+import ApiClient from "./api_client";
 import "./index.scss"
+import {retrieveLaunchParams} from '@telegram-apps/sdk';
+
+const { initDataRaw } = retrieveLaunchParams();
+
+const client = new ApiClient(initDataRaw)
+
+client.getState().then(req => {
+    req.json().then(data => {
+        for (const row in data) {
+            for (const col in row) {
+                drawer.draw(row, col, data[row][col].color)
+            }
+        }
+    })
+})
+
+
 
 const navPanel = document.getElementById('nav')
 const canvas = document.getElementById('canvas')
@@ -39,7 +56,7 @@ class Drawer {
         const x = Math.floor((e.clientX - this.rect.left) / scale);
         const y = Math.floor((e.clientY - this.rect.top) / scale);
         navPanel.innerHTML = `${Math.floor(x/10)}, ${Math.floor(y/10)}`
-        setPixel(x, y, 'black').then(r => console.log(r.json().then()))
+        client.setPixel(x, y, 'black').then(r => console.log(r.json().then()))
     }
 
     moveEvent(e) {
@@ -50,20 +67,6 @@ class Drawer {
 }
 
 const drawer = new Drawer(canvas, navPanel)
-
-getState().then(req => {
-    req.json().then(data => {
-        for (const row in data) {
-            for (const col in row) {
-                console.log({
-                    color: data[row][col],
-                    row, col
-                })
-                drawer.draw(row, col, data[row][col])
-            }
-        }
-    })
-})
 
 canvas.addEventListener('click', drawer.clickEvent.bind(drawer));
 canvas.addEventListener('mousemove', drawer.moveEvent.bind(drawer))

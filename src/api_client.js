@@ -1,13 +1,26 @@
-export async function setPixel(x,y, color) {
-    return fetch(`https://${process.env.API_HOST}/set`, {
-        headers: {
-            "Content-Type": "application/json"
-        },
-        method: "POST",
-        body: JSON.stringify({x, y, color})
-    })
-}
+export default class ApiClient {
+    constructor(initData) {
+        this.initData = initData;
+    }
 
-export async function getState() {
-    return fetch(`https://${host}/state`)
+    async setPixel(x, y, color) {
+        return fetch(`http://${process.env.API_HOST}/api/v1/set`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `tma ${this.initData}`
+            },
+            method: "POST",
+            body: JSON.stringify({x, y, color})
+        })
+    }
+
+    async getState() {
+        return fetch(`http://${process.env.API_HOST}/api/v1/state`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `tma ${this.initData}`
+            },
+            method: "GET"
+        })
+    }
 }

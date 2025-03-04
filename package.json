@@ -3,6 +3,7 @@
     "build": "webpack"
   },
   "devDependencies": {
+    "@telegram-apps/sdk": "^3.5.1",
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
     "dotenv-webpack": "^8.1.0",
